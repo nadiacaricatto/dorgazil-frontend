@@ -4,6 +4,7 @@ import CardCategoria from "../cardcategoria/CardCategoria";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 import Categoria from "../../../models/Categoria";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function ListaCategorias() {
 
@@ -42,6 +43,16 @@ function ListaCategorias() {
 
             <div className="flex justify-center w-full px-4 my-4">
                 <div className="container flex flex-col">
+
+                    
+                    <div className="flex justify-end mb-4">
+                        <Link to="/cadastrarcategoria">
+                            <button className="border rounded px-4 py-2 bg-indigo-600 text-white hover:bg-indigo-800">
+                                Nova Categoria
+                            </button>
+                        </Link>
+                    </div>
+
 
                     {
                        (!isLoading && categorias.length === 0) &&(

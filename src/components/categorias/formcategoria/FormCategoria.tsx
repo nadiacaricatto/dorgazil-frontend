@@ -8,7 +8,7 @@ import { ToastAlerta } from "../../../utils/ToastAlerta"
 function FormCategoria() {
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [categoria, setCategoria] = useState<Categoria>({} as Categoria)
+    const [categoria, setCategoria] = useState<Categoria>({ id: 0, nome: '' } as Categoria)
     const { id } = useParams<{ id: string }>()
 
     async function buscarCategoriaPorId() {
@@ -42,25 +42,23 @@ function FormCategoria() {
         setIsLoading(true)
 
         if (id !== undefined) {
-            // Atualização
             try {
                 await atualizar("/categorias", categoria, setCategoria, {})
-                ToastAlerta("O Categoria foi atualizado com sucesso!", "sucesso")
+                ToastAlerta("A Categoria foi atualizado com sucesso!", "sucesso")
             } catch (error: any) {
                 if (error.toString().includes("401")) {
                 } else {
-                    ToastAlerta("Erro ao atualizar o categoria!", "erro")
+                    ToastAlerta("Erro ao atualizar a categoria!", "erro")
                 }
             }
         } else {
-            // Cadastro
             try {
                 await cadastrar("/categorias", categoria, setCategoria)
-                ToastAlerta("O Categoria foi cadastrado com sucesso!", "sucesso")
+                ToastAlerta("A Categoria foi cadastrada com sucesso!", "sucesso")
             } catch (error: any) {
                 if (error.toString().includes("401")) {
                 } else {
-                    ToastAlerta("Erro ao cadastrar o categoria!", "erro")
+                    ToastAlerta("Erro ao cadastrar a categoria!", "erro")
                 }
             }
         }
@@ -74,13 +72,14 @@ function FormCategoria() {
     return (
         <div className="container flex flex-col items-center justify-center mx-auto">
             <h1 className="text-4xl text-center my-8">{id === undefined ? "Cadastrar" : "Atualizar"} Categoria</h1>
+
             <form className="w-1/2 flex flex-col gap-4" onSubmit={gerarNovoCategoria}>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="descricao">Descrição do Categoria</label>
+                    <label htmlFor="nome">Descrição da Categoria</label>
                     <input
                         type="text"
                         placeholder="Descreva aqui seu categoria"
-                        name="descricao"
+                        name="nome"
                         className="border-2 border-slate-700 rounded p-2"
                         value={categoria.nome}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}

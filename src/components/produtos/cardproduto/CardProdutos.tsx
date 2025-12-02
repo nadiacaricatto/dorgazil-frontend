@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { ShoppingCart } from "@phosphor-icons/react"
 import Produto from '../../../models/Produto'
 
 interface CardProdutoProps {
@@ -6,6 +7,21 @@ interface CardProdutoProps {
 }
 
 function CardProduto({ produto }: CardProdutoProps) {
+    
+    function adicionarAoCarrinho() {
+        const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]')
+        const produtoExiste = carrinho.find((item: any) => item.id === produto.id)
+        
+        if (produtoExiste) {
+            produtoExiste.quantidade += 1
+        } else {
+            carrinho.push({ ...produto, quantidade: 1 })
+        }
+        
+        localStorage.setItem('carrinho', JSON.stringify(carrinho))
+        alert('Produto adicionado ao carrinho!')
+    }
+    
     return (
         <div className='border-slate-900 border 
             flex flex-col rounded overflow-hidden justify-between'>
@@ -28,6 +44,13 @@ function CardProduto({ produto }: CardProdutoProps) {
                 </div>
             </div>
             <div className="flex">
+                <button 
+                    onClick={adicionarAoCarrinho}
+                    className='w-full text-white bg-green-500 
+                    hover:bg-green-700 flex items-center justify-center py-2 gap-2'>
+                    <ShoppingCart size={20} weight="fill" />
+                    Carrinho
+                </button>
                 <Link to={`/editarproduto/${produto.id}`}
                     className='w-full text-white bg-indigo-400 
                     hover:bg-indigo-800 flex items-center justify-center py-2'>
@@ -42,5 +65,4 @@ function CardProduto({ produto }: CardProdutoProps) {
         </div>
     )
 }
-
 export default CardProduto

@@ -4,14 +4,21 @@ import { ClipLoader } from "react-spinners";
 import Categoria from "../../../models/Categoria";
 import Produto from "../../../models/Produto";
 import { buscar as buscarCategoria } from "../../../services/CategoriaService";
-import { buscar, atualizar, cadastrar } from "../../../services/ProdutoService";
+import { buscar as buscarProduto, atualizar as atualizarProduto, cadastrar as cadastrarProduto } from "../../../services/ProdutoService";
+
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function FormProduto() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState<boolean>(false)
+
     const [categorias, setCategorias] = useState<Categoria[]>([])
-    const [categoria, setCategoria] = useState<Categoria>({ id: 0, nome: '' })    
+
+    const [categoria, setCategoria] = useState<Categoria>({
+        id: 0,
+        nome: ''
+    })
+
     const [produto, setProduto] = useState<Produto>({
         id: 0,
         nome: '',
@@ -19,14 +26,15 @@ function FormProduto() {
         foto: '',
         categoria: null
     })
+
     const { id } = useParams<{ id: string }>()
 
     async function buscarProdutoPorId(id: string) {
         try {
-            await buscar(`/produtos/${id}`, setProduto, {})
+            await buscarProduto(`/produtos/${id}`, setProduto, {})
         } catch (error: any) {
             if (error.toString().includes('401')) {
-                ToastAlerta('Erro de autenticação!', 'erro')
+                ToastAlerta('Ocorreu um erro na busca por Produtos. Tente novamente!', 'erro')
             }
         }
     }
@@ -36,7 +44,7 @@ function FormProduto() {
             await buscarCategoria('/categorias', setCategorias, {})
         } catch (error: any) {
             if (error.toString().includes('401')) {
-                ToastAlerta('Erro ao buscar categorias!', 'erro')
+                ToastAlerta('Ocorreu um erro na busca por Produtos. Tente novamente!', 'erro')
             }
         }
     }
@@ -46,7 +54,7 @@ function FormProduto() {
             await buscarCategoria(`/categorias/${idCategoria}`, setCategoria, {})
         } catch (error: any) {
             if (error.toString().includes('401')) {
-                ToastAlerta('Erro ao buscar categoria!', 'erro')
+                ToastAlerta('Ocorreu um erro na busca por Categorias. Tente novamente!', 'erro')
             }
         }
     }
@@ -60,10 +68,12 @@ function FormProduto() {
     }, [id])
 
     useEffect(() => {
-        setProduto({
-            ...produto,
-            categoria: categoria,
-        })
+        if (categoria.id !== 0) {
+            setProduto({
+                ...produto,
+                categoria: categoria,
+            })
+        }
     }, [categoria])
 
     function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
@@ -83,25 +93,17 @@ function FormProduto() {
 
         if (id !== undefined) {
             try {
-                await atualizar(`/produtos`, produto, setProduto, {})
-                ToastAlerta('Produto atualizado com sucesso!', 'sucesso')
+                await atualizarProduto(`/produtos/${id}`, produto, setProduto, {})
+                ToastAlerta('O Produto foi atualizado com sucesso!', 'sucesso')
             } catch (error: any) {
-                if (error.toString().includes('401')) {
-                    ToastAlerta('Erro de autenticação!', 'erro')
-                } else {
-                    ToastAlerta('Erro ao atualizar o produto!', 'erro')
-                }
+                ToastAlerta('Erro ao atualizar o produto. Tente novamente!', 'erro')
             }
         } else {
             try {
-                await cadastrar(`/produtos`, produto, setProduto)
-                ToastAlerta('Produto cadastrado com sucesso!', 'sucesso');
+                await cadastrarProduto(`/produtos`, produto, setProduto)
+                ToastAlerta('O Produto foi cadastrado com sucesso!', 'sucesso');
             } catch (error: any) {
-                if (error.toString().includes('401')) {
-                    ToastAlerta('Erro de autenticação!', 'erro')
-                } else {
-                    ToastAlerta('Erro ao cadastrar o produto!', 'erro');
-                }
+                ToastAlerta('Erro ao cadastrar o produto!', 'erro');
             }
         }
 

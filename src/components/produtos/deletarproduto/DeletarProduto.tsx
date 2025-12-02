@@ -37,11 +37,11 @@ function DeletarProduto() {
         try {
             await deletar(`/produtos/${id}`, {
             })
-            ToastAlerta('Produto apagada com sucesso', 'sucesso')
+            ToastAlerta('Exclusão de Produto feita com sucesso', 'sucesso')
         } catch (error: any) {
             if (error.toString().includes('401')) {
             }else {
-                ToastAlerta('Erro ao deletar produto.', 'erro')
+                ToastAlerta('Ocorreu um erro ao excluir o Produto.Tente novamente!', 'erro')
             }
         }
         setIsLoading(false)
