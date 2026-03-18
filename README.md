@@ -1,6 +1,6 @@
 # 💊 Dorgazil — Frontend 🤒
 
-> Interface para a Farmácia Dorgazil (que existe no meu mundo maravilhoso de ideias), com CRUD completo de produtos e categorias, carrinho de compras e deploy em produção!
+> Interface para a **Farmácia Dorgazil** (que existe no meu mundo maravilhoso de ideias 💭), com CRUD completo de produtos e categorias, carrinho de compras e deploy em produção!
 
 ---
 
