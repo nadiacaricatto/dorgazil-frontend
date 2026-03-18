@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# 💊 Dorgazil — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Interface para a Farmácia Dorgazil (que existe no meu mundo maravilhoso de ideias), com CRUD completo de produtos e categorias, carrinho de compras e deploy em produção!
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📖 Sobre o Projeto
 
-## React Compiler
+> A **Dorgazil** é uma aplicação fullstack de e-commerce. 
+>
+> Este repositório contém o **frontend**: uma SPA desenvolvida em React com TypeScript que consome a API REST do backend, com listagem, cadastro, edição e remoção de produtos e categorias, carrinho de compras e feedback visual com toasts.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🏠 Página inicial (Home)
+- 📦 Listagem de produtos com cards
+- 🗂️ Listagem de categorias com cards
+- ➕ Cadastro e edição de produtos e categorias via formulário
+- 🗑️ Exclusão com modal de confirmação
+- 🛒 Carrinho de compras
+- 🔔 Feedback visual com Toast alerts
+- 📱 Interface responsiva
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tecnologias
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+
+- React + TypeScript
+- Vite
+- Services para consumo de API REST
+- Models tipados (Categoria, Produto)
+- React Router DOM
+- Toast alerts
+
+---
+
+## 🌐 Deploy
+
+A aplicação está disponível em produção:
+
+👉 **[projeto-final-bloco-03-omega.vercel.app](https://projeto-final-bloco-03-omega.vercel.app)**
+
+---
+
+## 🚀 Como Rodar Localmente
+
+**Pré-requisitos:** Node.js 18+
+
+```bash
+# Clone o repositório
+git clone https://github.com/nadiacaricatto/dorgazil-frontend.git
+
+# Entre na pasta
+cd dorgazil-frontend
+
+# Instale as dependências
+npm install
+
+# Rode o projeto
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+> ⚠️ Para funcionalidade completa, o backend precisa estar rodando em `http://localhost:8080`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🔗 Projeto Relacionado
+
+Este frontend consome a API do backend da Dorgazil:
+
+👉 [dorgazil-backend](https://github.com/nadiacaricatto/dorgazil-backend)
+
+---
+
+## 👩‍💻 Autora
+
+Desenvolvido por **Nádia Caricatto**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nadiacaricatto/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/nadiacaricatto)
+
+---
+
+*Desenvolvido como projeto final do Bloco 03 do Bootcamp da **Generation Brasil**, com foco em desenvolvimento frontend com React, TypeScript e consumo de API REST.*
